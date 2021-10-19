@@ -2,3 +2,5 @@
 **/*.key
 **/*.pem
 **/*.csr
+micro-service/image.tar
+micro-service/tedge-device-registry.zip
