@@ -25,18 +25,13 @@ def register(device):
     user = f'{device}_{random_string(5)}'
     password = random_string(20)
 
-
     command = f'./post-registration.sh {device} {user} {password}'
-    print('command: ', command)
     res = os.system(command) 
-    print('res: ', res)
 
-    credentials = {
-        'url': 'https://my-ca.com',
-        'user': user,
-        'pass': password,
-    }
-    return jsonify(credentials) 
+    if res == 0:
+        return f'{{"url": "https://my-ca.com", "user": "{user}", "pass": "{password}"}}'
+    else:
+        return f'{{"error": "{res}"}}'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
