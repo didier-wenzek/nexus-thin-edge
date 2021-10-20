@@ -22,14 +22,17 @@ def health():
 # Verify the status of the microservice
 @app.route('/register/<device>')
 def register(device):
-    user = f'{device}_{random_string(5)}'
+    host = 'pgw.38.qa.go.nexusgroup.com:8443'
+    account = 'sag_te_di1_dc1'
+    url = f'https://{host}/est/{account}/simpleenroll'
+    user = f'user_{random_string(10)}'
     password = random_string(20)
 
     command = f'./post-registration.sh {device} {user} {password}'
     res = os.system(command) 
 
     if res == 0:
-        return f'{{"url": "https://my-ca.com", "user": "{user}", "pass": "{password}"}}'
+        return f'{{"url": "{url}", "user": "{user}", "pass": "{password}"}}'
     else:
         return f'{{"error": "{res}"}}'
 
