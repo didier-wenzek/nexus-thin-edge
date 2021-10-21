@@ -47,6 +47,9 @@ curl -s -H "Content-Type: application/pkcs10" \
     openssl pkcs7 -print_certs |
     ./extract-cert.sh >$CN.pem
 
+## Add the chain to the certificate
+cat sag-nexus.root >>$CN.pem
+
 ## Use the certificate
 sudo mv $CN.key /etc/tedge/device-certs/
 sudo mv $CN.pem /etc/tedge/device-certs/
