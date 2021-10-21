@@ -32,7 +32,7 @@ def register(device):
     res = os.system(command) 
 
     if res == 0:
-        return f'{{"url": "{url}", "user": "{user}", "pass": "{password}"}}'
+        return f'{{"endpoint": "{url}", "user": "{user}", "pass": "{password}"}}'
     else:
         return f'{{"error": "{res}"}}'
 
