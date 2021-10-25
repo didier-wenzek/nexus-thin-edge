@@ -1,31 +1,26 @@
 #!/bin/bash
 
-if [ $# -le 2 ]
-then
-    exec /usr/bin/tedge $@
-fi
-
-if [ "$1 $2 $3" != "cert request --c8y" ]
+if [ "$1 $2" != "cert request" ]
 then
     exec /usr/bin/tedge $@
 fi
 
 if [ $# -ne 7 ]
 then
-    echo "usage: $0 cert request --c8y <DEVICE_ID> <C8Y_URL> <C8Y_TENANT> <C8Y_USER>"
+    echo "usage: $0 cert request c8y <C8Y_URL> <C8Y_TENANT> <C8Y_USER> <DEVICE_ID>"
     echo "    Request a certificate to connect this device to Cumulocity"
     echo
-    echo "    DEVICE_ID:    the device identifier to be used as a common name for this device"
     echo "    C8Y_URL:      the Cumulocity base url"
     echo "    C8Y_TENANT:   the Cumulocity tenant where this device is registered"
     echo "    C8Y_USER:     the Cumulocity user on whose behalf this device is trusted"
+    echo "    DEVICE_ID:    the device identifier to be used as a common name for this device"
     exit
 fi
 
-CN=$4
-C8Y=$5
-TENANT=$6
-USER=$7
+C8Y=$4
+TENANT=$5
+USER=$6
+CN=$7
 PASS=$(read -s -p "Password: "; echo $REPLY)
 
 ## Register the request on C8Y
