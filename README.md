@@ -4,6 +4,16 @@ Device certificate management
 
 ## Demo
 
+### Preparation
+
+Check no certificate, no connection
+
+```
+sudo tedge disconnect c8y
+sudo tedge config set device.cert.path /etc/tedge/device-certs/device-cert.pem
+sudo tedge config set device.key.path /etc/tedge/device-certs/device-key.pem
+```
+
 ### User experience
 
 ```
@@ -30,6 +40,10 @@ curl --user t398942/didier:$(read -s -p "Password: "; echo $REPLY) https://lates
 ```
 
 This password can then be used to authenticate the signing request
+
+```
+curl -s -k -H "Content-Type: application/pkcs10" --data-binary @didier-device.csr --digest --user USER:PASS URL
+```
 
 ```
 ./post-signing-request.sh didier-device.csr thinedge 543210 >didier-device.pem
