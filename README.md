@@ -1,6 +1,11 @@
 # nexus-thin-edge
-Device certificate management
 
+A POC to evaluate device certificate creation with [thin-edge.io](https://github.com/thin-edge/thin-edge.io),
+[Cumulocity IoT](https://www.softwareag.cloud/site/product/cumulocity-iot.html#/)
+ and [Nexus Go IoT](https://www.nexusgroup.com/solutions/online-services/iot/).
+
+This repository contains no credentials:
+you will need an account on Cumulocity and another one on Nexus to run the demo. 
 
 ## Demo
 
@@ -33,7 +38,7 @@ The first step is to create a signing request
 ./decode-csr.sh didier-device.csr | less
 ```
 
-Then one needs to request for a password
+Then one needs to request Cumulocity for a password
 
 ```
 curl --user t398942/didier:$(read -s -p "Password: "; echo $REPLY) https://latest.stage.c8y.io/service/tedge-device-registry/register/didier-device
